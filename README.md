@@ -1,5 +1,5 @@
 # ARQSOFT
-This is the repository for the Arquitecture of Software subject assignments.
+This is the repository for the Arquitecture of Software subject assignments.  
 Programming Language: Java/Python
 ## Index
 In this repository there will work in 2 different problems.  
