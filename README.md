@@ -1,16 +1,16 @@
 # ARQSOFT
 This is the repository for the Arquitecture of Software subject assignments.
 Programming Language: Java/Python
-##Index
+## Index
 In this repository there will work in 2 different problems.  
 1)Chess Game <- AS CLASS EXAMPLE  
 2)Spreadsheet <- IMPORTANT PROJECT  
 
 The repository follows this index:  
-####Documents:
+#### Documents:
 - Chess Game(Deliveries)
 - Spreadsheet(Project)
-####Source code:
+#### Source code:
 - Chess Game
 - Spreadsheet(Project)
 
