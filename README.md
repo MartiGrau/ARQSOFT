@@ -14,5 +14,6 @@ The repository follows this index:
 - Chess Game
 - Spreadsheet(Project)
 
-## Theory of Sequence Diagrams:
+## Theory and other aspects
+#### Theory of Sequence Diagrams:
 https://www.visual-paradigm.com/guide/uml-unified-modeling-language/what-is-sequence-diagram/
