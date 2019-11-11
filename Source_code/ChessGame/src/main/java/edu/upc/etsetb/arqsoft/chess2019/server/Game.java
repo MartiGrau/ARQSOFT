@@ -11,12 +11,20 @@ import edu.upc.etsetb.arqsoft.chess2019.client.NetworkAdapter;
  *
  * @author JuanCarlos
  */
-public class MirrorServer {
+public class Game {
    
     private NetworkAdapter networkAdapter;
+    private Player player1;
+    private Player player2;
+    private Board board;
+    
 
-    public MirrorServer(NetworkAdapter networkAdapter) {
+    public Game(NetworkAdapter networkAdapter, Player player1, Player player2, Board board) {
         this.networkAdapter = networkAdapter;
+        this.player1=player1;
+        this.player2=player2;
+        this.board=board;
+        //set_Figures();
     }
 
     /**
