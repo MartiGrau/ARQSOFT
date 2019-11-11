@@ -14,8 +14,8 @@ public class Square {
     private int row;
     private int col;
     
-    public Square(int row, int col, Figure figure){
-        this.setFigure(row,col,figure);
+    public Square(Figure figure){
+        this.setFigure(figure);
         
     }
 
@@ -23,9 +23,7 @@ public class Square {
         return this.figure;
     }
     
-    public void setFigure(int row, int col, Figure fig) {
+    public void setFigure(Figure fig) {
         this.figure = fig;
     }
-    
-    public int 
 }

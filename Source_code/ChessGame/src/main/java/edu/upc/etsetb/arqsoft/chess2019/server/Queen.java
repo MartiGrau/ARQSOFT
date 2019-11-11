@@ -9,6 +9,6 @@ package edu.upc.etsetb.arqsoft.chess2019.server;
  *
  * @author mgrau
  */
-public class Queen {
+final public class Queen extends Figure{
     
 }
