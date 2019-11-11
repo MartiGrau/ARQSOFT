@@ -15,5 +15,12 @@ The repository follows this index:
 - Spreadsheet(Project)
 
 ## Theory and other aspects
+All learning guide in https://www.visual-paradigm.com/guide/
+#### Use Cases and Model Domain
+https://www.visual-paradigm.com/guide/use-case/what-is-use-case-specification/
+https://www.visual-paradigm.com/guide/uml-unified-modeling-language/what-is-use-case-diagram/
 #### Theory of Sequence Diagrams:
 https://www.visual-paradigm.com/guide/uml-unified-modeling-language/what-is-sequence-diagram/
+
+#### General responsabilities assignment patterns (GRASP)
+http://www.kamilgrzybek.com/design/grasp-explained/
