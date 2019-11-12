@@ -10,8 +10,14 @@ package edu.upc.etsetb.arqsoft.chess2019.server;
  * @author mgrau
  */
 final public class Pawn extends Figure{
-    public boolean checkMove(int initial_row, int initial_col, int dest_row, int dest_col){
+    Pawn(Color color)
+    {
+        super(color);
+    }
+    @Override
+    public boolean checkMove(int initial_row, int initial_col, int dest_row, int dest_col)
+    {
        //TODO
        return true;
-   }
+    }
 }
