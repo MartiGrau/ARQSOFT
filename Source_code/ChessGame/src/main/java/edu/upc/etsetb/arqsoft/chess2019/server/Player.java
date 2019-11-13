@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package edu.upc.etsetb.arqsoft.chess2019.server;
+import edu.upc.etsetb.arqsoft.chess2019.client.Color;
 
 /**
  *
