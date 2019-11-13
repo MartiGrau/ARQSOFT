@@ -9,6 +9,12 @@ package edu.upc.etsetb.arqsoft.chess2019.server;
  *
  * @author mgrau
  */
-public class Player {
+public class Player 
+{
+    private final Color color;
+    public Player(Color color)
+    {
+        this.color = color;
+    }     
     
 }

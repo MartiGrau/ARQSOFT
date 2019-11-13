@@ -10,6 +10,7 @@ package edu.upc.etsetb.arqsoft.chess2019.server;
  * @author mgrau
  */
 final public class Pawn extends Figure{
+    private final boolean isFirstMove = true;
     Pawn(Color color)
     {
         super(color);
