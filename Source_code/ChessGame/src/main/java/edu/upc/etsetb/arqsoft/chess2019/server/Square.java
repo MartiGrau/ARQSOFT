@@ -9,14 +9,11 @@ package edu.upc.etsetb.arqsoft.chess2019.server;
  *
  * @author mgrau
  */
-public class Square {
+public final class Square {
     private Figure figure;
-    private int row;
-    private int col;
     
     public Square(Figure figure){
-        this.setFigure(figure);
-        
+        this.setFigure(figure);       
     }
 
     public Figure getFigure(){
@@ -25,5 +22,7 @@ public class Square {
     
     public void setFigure(Figure fig) {
         this.figure = fig;
-    }
+    }  
+
+    
 }

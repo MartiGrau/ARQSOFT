@@ -4,11 +4,22 @@
  * and open the template in the editor.
  */
 package edu.upc.etsetb.arqsoft.chess2019.server;
+import edu.upc.etsetb.arqsoft.chess2019.client.Color;
 
 /**
  *
  * @author mgrau
  */
-final public class King extends Figure{
-    
+final public class King extends Figure
+{
+    King(Color color)
+    {
+        super(color);
+    }
+    @Override
+    public boolean checkMove(int initial_row, int initial_col, int dest_row, int dest_col)
+    {
+       //TODO
+       return true;
+    }    
 }

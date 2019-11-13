@@ -4,11 +4,24 @@
  * and open the template in the editor.
  */
 package edu.upc.etsetb.arqsoft.chess2019.server;
+import edu.upc.etsetb.arqsoft.chess2019.client.Color;
 
 /**
  *
  * @author mgrau
  */
-public class Figure {
+public abstract class Figure 
+{    
+    protected Color color;
+    
+    public Figure(Color color)
+    {
+        this.color = color;       
+    }
+    public Color getColor()
+    {
+        return this.color;
+    }   
+    public abstract boolean checkMove(int initial_row, int initial_col, int dest_row, int dest_col);
     
 }

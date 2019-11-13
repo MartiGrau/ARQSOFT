@@ -4,11 +4,18 @@
  * and open the template in the editor.
  */
 package edu.upc.etsetb.arqsoft.chess2019.server;
+import edu.upc.etsetb.arqsoft.chess2019.client.Color;
 
 /**
  *
  * @author mgrau
  */
-public class Player {
+public class Player 
+{
+    private final Color color;
+    public Player(Color color)
+    {
+        this.color = color;
+    }     
     
 }
