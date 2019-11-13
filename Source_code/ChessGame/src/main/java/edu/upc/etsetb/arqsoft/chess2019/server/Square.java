@@ -11,9 +11,12 @@ package edu.upc.etsetb.arqsoft.chess2019.server;
  */
 public class Square {
     private Figure figure;
+    private int row;
+    private int col;
     
     public Square(Figure figure){
         this.setFigure(figure);
+        
     }
 
     public Figure getFigure(){
