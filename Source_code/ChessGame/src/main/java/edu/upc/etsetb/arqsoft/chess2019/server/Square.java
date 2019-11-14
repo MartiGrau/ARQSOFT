@@ -13,7 +13,14 @@ public final class Square {
     private Figure figure;
     
     public Square(Figure figure){
-        this.setFigure(figure);       
+        if (figure != null)
+        {
+            this.setFigure(figure);      
+        }
+        else
+        {
+            this.figure = null;
+        }  
     }
 
     public Figure getFigure(){

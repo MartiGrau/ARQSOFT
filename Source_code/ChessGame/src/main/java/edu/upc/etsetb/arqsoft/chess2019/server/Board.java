@@ -10,9 +10,16 @@ import edu.upc.etsetb.arqsoft.chess2019.client.Color;
  * @author mgrau
  */
 public class Board {
-    Square squares[][] = null;
+    Square squares[][] = new Square[8][8];
     
     public Board(){
+        for (int i = 0; i < 8; i++)
+        {            
+            for (int j = 0; j<8; j++)
+            {
+                squares[i][j] = new Square(null); 
+            }
+        }  
         // White pawns
         for(int x=0; x<8; x++){
             squares[1][x] = new Square(new Pawn(Color.WHITE));
@@ -47,14 +54,7 @@ public class Board {
 
         //Kings
         squares[0][4] = new Square(new King(Color.WHITE));
-        squares[7][4] = new Square(new King(Color.BLACK));
-        
-        // initialize the ones without piece
-        for (int i = 2; i < 6; i++) { 
-            for (int j = 0; j < 8; j++) { 
-                squares[i][j] = new Square(null); 
-            } 
-        } 
+        squares[7][4] = new Square(new King(Color.BLACK)); 
         
     }
     
