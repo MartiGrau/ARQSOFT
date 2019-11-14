@@ -13,15 +13,31 @@ import edu.upc.etsetb.arqsoft.chess2019.client.Color;
 public abstract class Figure 
 {    
     protected Color color;
+    private int row;
+    private int column;
     
-    public Figure(Color color)
+    public Figure(Color color, int row, int column)
     {
-        this.color = color;       
+        this.color = color;  
+        this.row = row;
+        this.column = column;
     }
     public Color getColor()
     {
         return this.color;
     }   
-    public abstract boolean checkMove(int initial_row, int initial_col, int dest_row, int dest_col);
+    public void canReachDestination(int initial_row, int initial_col, int dest_row, int dest_col, Board board) throws NoPieceMovementException, NoPathFreeException
+    {
+        isPieceMovement(initial_row, initial_col, dest_row, dest_col);
+        isPathFree(initial_row, initial_col, dest_row, dest_col, board);
+    }    
+    protected abstract void isPieceMovement(int initial_row, int initial_col, int dest_row, int dest_col) throws NoPieceMovementException;
+    protected abstract void isPathFree(int initial_row, int initial_col, int dest_row, int dest_col, Board board) throws NoPathFreeException;
+    public void proceedToMove(int rD, int cD, Board board)
+    {
+        board.getSquare(rD,cD).setFigure(this); 
+        board.getSquare(row, column).setFigure(null);
+    }
+    
     
 }

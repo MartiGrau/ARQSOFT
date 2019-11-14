@@ -17,6 +17,7 @@ public class Game {
     private Player player1;
     private Player player2;
     private Board board;
+    boolean isPlayer1;
     
 
     public Game()
@@ -24,6 +25,7 @@ public class Game {
         this.player1=new Player(Color.WHITE);
         this.player2=new Player(Color.BLACK);
         this.board=new Board();
+        this.isPlayer1 = true;
     }
 
     public void setServerProtMngr(ServerProtocolMngr protMngr) {
@@ -31,6 +33,16 @@ public class Game {
     }
 
     public void move(int rO, int cO, int rD, int cD) {
+        System.out.println("Calling move");
+        Player actualPlayer;
+        if (isPlayer1)
+        {
+            actualPlayer = player1;
+        } 
+        else{
+            actualPlayer = player2;
+        }
+       
         /*
         Initial version: it just sends back an OK message to the client.
         You should modify its code for implementing the sequence diagram in the 
@@ -41,8 +53,44 @@ public class Game {
          */
         //         this.protMngr.sendFromServerToClient("E this is an error message");
 
+        Figure pieceToMove;      
+        pieceToMove = this.board.getPiece(rO, cO);              
         
+        if (pieceToMove == null || pieceToMove.getColor() != actualPlayer.getColor())
+        {
+            this.protMngr.sendFromServerToClient("Error: there is not a piece you can move on this pos");
+            return;
+        }
         
+        Figure pieceDest;
+        pieceDest = this.board.getPiece(rD, cD);
+        
+        if (pieceDest != null && pieceDest.getColor() == actualPlayer.getColor())
+        {
+            this.protMngr.sendFromServerToClient("Error: there is a piece of the same color in the dest pos");
+            return;
+        }
+        
+        try
+        {        
+            actualPlayer.move(pieceToMove, rO, cO, rD, cD, this.board);
+        } catch(NoPieceMovementException | NoPathFreeException e)
+        {
+            System.out.println("Exception thrown while trying to move: " + e);
+            return;
+        }
+        
+        try
+        {
+            isKingOfMovingPieceThreatened();    
+        }
+        catch (KingIsThreatenedException e)
+        {
+            this.protMngr.sendFromServerToClient("Error: the movement is invalid because the king is threatened");   
+            return;
+        }
+        
+        actualPlayer.proceedToMove(pieceToMove, rD, cD, board);        
         /* 
         DO NOT CHANGE THE CODE BELOW.
         FINAL PART OF THE METHOD. IF ARRIVED HERE, THE MOVEMENT CAN BE PERFORMED
@@ -62,6 +110,7 @@ public class Game {
         if(isCheckMate){
             this.proceedToFinalizedGame() ;
         }
+        System.out.println("Exit move");
 
     }
 
@@ -74,4 +123,9 @@ public class Game {
         // IF THE PROGRAM SHOULD BE COMPLETED, IT SHOULD BE IMPLEMENTED
         return ;
     }
+    
+    private void isKingOfMovingPieceThreatened() throws KingIsThreatenedException
+    {
+        
+    } 
 }

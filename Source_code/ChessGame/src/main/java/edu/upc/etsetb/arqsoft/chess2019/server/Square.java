@@ -23,13 +23,12 @@ public final class Square {
         }  
     }
 
-    public Figure getFigure(){
+    public Figure getFigure()
+    {
         return this.figure;
     }
     
     public void setFigure(Figure fig) {
         this.figure = fig;
-    }  
-
-    
+    }      
 }

@@ -12,14 +12,19 @@ import edu.upc.etsetb.arqsoft.chess2019.client.Color;
  */
 final public class Bishop extends Figure
 {
-    Bishop(Color color)
+    Bishop(Color color, int row, int column)
     {
-        super(color);
+        super(color, row, column);
+    }
+    
+    @Override
+    protected void isPieceMovement(int initial_row, int initial_col, int dest_row, int dest_col) throws NoPieceMovementException
+    {
+        // TODO
     }
     @Override
-    public boolean checkMove(int initial_row, int initial_col, int dest_row, int dest_col)
+    protected void isPathFree(int initial_row, int initial_col, int dest_row, int dest_col, Board board) throws NoPathFreeException
     {
-       //TODO
-       return true;
-    }    
+        // TODO
+    }
 }

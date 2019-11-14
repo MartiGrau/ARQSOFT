@@ -12,14 +12,19 @@ import edu.upc.etsetb.arqsoft.chess2019.client.Color;
  */
 final public class King extends Figure
 {
-    King(Color color)
+    King(Color color, int row, int column)
     {
-        super(color);
+        super(color, row, column);
     }
     @Override
-    public boolean checkMove(int initial_row, int initial_col, int dest_row, int dest_col)
+    protected void isPieceMovement(int initial_row, int initial_col, int dest_row, int dest_col) throws NoPieceMovementException
     {
-       //TODO
-       return true;
-    }    
+        // TODO
+    }
+    @Override
+    protected void isPathFree(int initial_row, int initial_col, int dest_row, int dest_col, Board board) throws NoPathFreeException
+    {
+        // TODO
+    }
+  
 }
