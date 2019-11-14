@@ -42,7 +42,12 @@ public class Game {
         else{
             actualPlayer = player2;
         }
-       
+        
+        // use indexes instead of positions:
+        rO -= 1;
+        cO -= 1;
+        rD -= 1;
+        cD -= 1;
         /*
         Initial version: it just sends back an OK message to the client.
         You should modify its code for implementing the sequence diagram in the 
@@ -111,7 +116,8 @@ public class Game {
             this.proceedToFinalizedGame() ;
         }
         System.out.println("Exit move");
-
+        // Turn of other opponent
+        isPlayer1 = !isPlayer1;
     }
 
     private boolean assessCheckOrCheckMate(StringBuilder assessMess) {

@@ -5,6 +5,7 @@
  */
 package edu.upc.etsetb.arqsoft.chess2019.server;
 import edu.upc.etsetb.arqsoft.chess2019.client.Color;
+import static java.lang.Math.abs;
 
 /**
  *
@@ -19,8 +20,16 @@ final public class Bishop extends Figure
     
     @Override
     protected void isPieceMovement(int initial_row, int initial_col, int dest_row, int dest_col) throws NoPieceMovementException
-    {
-        // TODO
+    {   
+        // check movement is diagonal
+        if (abs(initial_row - dest_row)!= abs(initial_col - dest_col))
+        {
+            throw new NoPieceMovementException();
+        } 
+        if (initial_row == dest_row && initial_col == dest_col)
+        {
+            throw new NoPieceMovementException();
+        }
     }
     @Override
     protected void isPathFree(int initial_row, int initial_col, int dest_row, int dest_col, Board board) throws NoPathFreeException
