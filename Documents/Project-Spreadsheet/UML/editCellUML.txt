@@ -1,0 +1,17 @@
+System->User : Asks for action
+User->System: Chooses edit cell
+System->User: Asks cell to edit
+User->System: Inputs cell to edit
+System->Spreadsheet: CheckCellExists
+break cell does not exist 
+System<-Spreadsheet: doesCellExist
+end
+System->User: Asks for input
+User->System: Inputs input
+System->Spreadsheet: SaveInput(input)
+Spreadsheet->Spreadsheet: CheckInputType(input)
+break inputIsNoType 
+Spreadsheet->System: notValidInput
+end
+Spreadsheet->Spreadsheet: editCell(input)
+System->User: Confirms cell was edited
