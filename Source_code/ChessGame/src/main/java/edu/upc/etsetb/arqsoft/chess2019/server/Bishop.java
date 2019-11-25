@@ -26,7 +26,7 @@ final public class Bishop extends Figure
         {
             throw new NoPieceMovementException();
         } 
-        if (initial_row == dest_row && initial_col == dest_col)
+        if (initial_row == dest_row || initial_col == dest_col)
         {
             throw new NoPieceMovementException();
         }
@@ -34,6 +34,15 @@ final public class Bishop extends Figure
     @Override
     protected void isPathFree(int initial_row, int initial_col, int dest_row, int dest_col, Board board) throws NoPathFreeException
     {
-        // TODO
+        int direction_row = dest_row > initial_row ? 1 : -1;
+        int direction_col = dest_col > initial_col ? 1 : -1;
+        for (int i=1; i <= abs(dest_row - initial_row)-1; i++)
+        {
+            if(board.getPiece(initial_row + i*direction_row, initial_col + i*direction_col) != null)
+            {
+                throw new NoPathFreeException();
+                
+            }
+        } 
     }
 }

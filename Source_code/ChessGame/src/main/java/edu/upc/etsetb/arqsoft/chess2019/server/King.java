@@ -5,6 +5,7 @@
  */
 package edu.upc.etsetb.arqsoft.chess2019.server;
 import edu.upc.etsetb.arqsoft.chess2019.client.Color;
+import static java.lang.Math.abs;
 
 /**
  *
@@ -19,7 +20,10 @@ final public class King extends Figure
     @Override
     protected void isPieceMovement(int initial_row, int initial_col, int dest_row, int dest_col) throws NoPieceMovementException
     {
-        // TODO
+        if (abs(initial_row - dest_row) > 1 && abs(initial_col - dest_col) > 1)
+        {
+            throw new NoPieceMovementException();
+        }
     }
     @Override
     protected void isPathFree(int initial_row, int initial_col, int dest_row, int dest_col, Board board) throws NoPathFreeException

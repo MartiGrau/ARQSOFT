@@ -19,7 +19,7 @@ final public class Queen extends Figure
     @Override
     protected void isPieceMovement(int initial_row, int initial_col, int dest_row, int dest_col) throws NoPieceMovementException
     {
-        // TODO
+        // All possibilities.. Any exception, only isPathFree
     }
     @Override
     protected void isPathFree(int initial_row, int initial_col, int dest_row, int dest_col, Board board) throws NoPathFreeException
