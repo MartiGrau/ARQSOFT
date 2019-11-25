@@ -1,0 +1,13 @@
+@startuml
+System -> User: Asks for action
+User -> System: Chooses get value from cell
+System -> User: Asks cell to get value
+User -> System: Inputs cell to edit
+System -> Spreadsheet: CheckCellExist
+break cell does not exist
+Spreadsheet -> System: doesCellExist
+end
+System -> Spreadsheet: getCell()
+Spreadsheet -> Spreadsheet: checkCellType
+Spreadsheet -> Spreadsheet: getCellValue()
+Spreadsheet -> System: CellValue
