@@ -9,14 +9,7 @@ package spreadsheet;
  *
  * @author uni
  */
-public class SpreadSheet {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) 
-    {
-        // TODO code application logic here
-    }
-    
+public class SpreadSheet 
+{
+    private Cell cells[][];     
 }

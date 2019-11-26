@@ -15,7 +15,7 @@ public class StringCell extends Cell
     {
         super(content);
     }
-        @Override
+    @Override
     public String getContent()
     {
         return content;

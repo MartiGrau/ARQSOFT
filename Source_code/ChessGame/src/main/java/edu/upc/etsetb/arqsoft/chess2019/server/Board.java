@@ -10,9 +10,10 @@ import edu.upc.etsetb.arqsoft.chess2019.client.Color;
  * @author mgrau
  */
 public class Board {
-    Square squares[][] = new Square[8][8];
+    Square squares[][];
     
     public Board(){
+        this.squares = new Square[8][8];
         for (int i = 0; i < 8; i++)
         {            
             for (int j = 0; j<8; j++)
