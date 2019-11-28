@@ -12,9 +12,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -157,8 +155,7 @@ public class BishopTest {
         int rO = 4;
         int cO = 4;
         int rD = rO+3;
-        int cD = cO+3;
-               
+        int cD = cO+3;              
 
         bishopInstance.isPathFree(rO, cO, rD, cD, mockBoard);
     } 

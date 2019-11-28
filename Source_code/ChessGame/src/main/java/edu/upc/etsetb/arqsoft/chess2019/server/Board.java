@@ -72,6 +72,11 @@ public class Board {
     {
          return squares[row][col].getFigure();
     }
+    
+    public Color getPieceColor(int r, int c)
+    {
+        return squares[r][c].getFigure().getColor();
+    }
 
 
 }

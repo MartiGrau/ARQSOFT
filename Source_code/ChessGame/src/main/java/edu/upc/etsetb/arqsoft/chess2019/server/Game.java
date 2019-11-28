@@ -58,18 +58,17 @@ public class Game {
          */
         //         this.protMngr.sendFromServerToClient("E this is an error message");
 
-        Figure pieceToMove;      
-        pieceToMove = this.board.getPiece(rO, cO);              
+        Figure pieceToMove;
+        Figure pieceDest;
+        pieceToMove = this.board.getPiece(rO, cO);                  
+        pieceDest = this.board.getPiece(rD, cD);
         
-        if (pieceToMove == null || pieceToMove.getColor() != actualPlayer.getColor())
+        if (pieceToMove == null || this.board.getPieceColor(rO, cO) != actualPlayer.getColor())
         {
             this.protMngr.sendFromServerToClient("Error: there is not a piece you can move on this pos");
             return;
         }
-        
-        Figure pieceDest;
-        pieceDest = this.board.getPiece(rD, cD);
-        
+                
         if (pieceDest != null && pieceDest.getColor() == actualPlayer.getColor())
         {
             this.protMngr.sendFromServerToClient("Error: there is a piece of the same color in the dest pos");
