@@ -16,7 +16,7 @@ public class Client {
     
     public static void main(String[] args) 
     {
-        // TODO code application logic here
+        System.out.println("To start, enter size of your spreadsheet: <int> <int>");
     }
     
 }
