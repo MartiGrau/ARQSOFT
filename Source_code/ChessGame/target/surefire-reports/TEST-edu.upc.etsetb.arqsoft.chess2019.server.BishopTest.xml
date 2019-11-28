@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="3" failures="0" name="edu.upc.etsetb.arqsoft.chess2019.server.BishopTest" time="0.073" errors="0" skipped="0">
+<testsuite tests="5" failures="0" name="edu.upc.etsetb.arqsoft.chess2019.server.BishopTest" time="0.481" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib"/>
@@ -60,7 +60,9 @@
     <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="edu.upc.etsetb.arqsoft.chess2019.server.BishopTest" name="testIsPieceMovementOKr3cm2" time="0.001"/>
+  <testcase classname="edu.upc.etsetb.arqsoft.chess2019.server.BishopTest" name="testIsPathFreeKOr3c3" time="0.013"/>
+  <testcase classname="edu.upc.etsetb.arqsoft.chess2019.server.BishopTest" name="testIsPathFreeOKr3c3" time="0"/>
+  <testcase classname="edu.upc.etsetb.arqsoft.chess2019.server.BishopTest" name="testIsPieceMovementKOr3cm2" time="0"/>
   <testcase classname="edu.upc.etsetb.arqsoft.chess2019.server.BishopTest" name="testIsPieceMovementOKr2c2" time="0"/>
   <testcase classname="edu.upc.etsetb.arqsoft.chess2019.server.BishopTest" name="testConstAndGetColorOK" time="0"/>
 </testsuite>

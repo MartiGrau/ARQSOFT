@@ -13,19 +13,23 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
+import static org.mockito.MockitoAnnotations.initMocks;
+import org.mockito.junit.MockitoJUnitRunner;
 
 /**
  *
  * @author mgrau
  */
+@RunWith(MockitoJUnitRunner.class)
 public class BishopTest {
     
     @Mock
     private Board mockBoard;
     
-    @InjectMocks
     private Bishop bishopInstance;
     
     public BishopTest() {
@@ -43,6 +47,7 @@ public class BishopTest {
     
     @Before
     public void setUp() {
+        initMocks(this);
         bishopInstance = new Bishop(Color.WHITE, 3, 1);
     }
     
@@ -104,7 +109,7 @@ public class BishopTest {
     
     // Check it throws exception     
     @Test(expected = NoPieceMovementException.class)
-    public void testIsPieceMovementOKr3cm2() throws Exception{
+    public void testIsPieceMovementKOr3cm2() throws Exception{
         System.out.println("is piece movement ok rO+2 cO+2");
         int rO = 4;
         int cO = 4;
@@ -115,20 +120,48 @@ public class BishopTest {
 
     /**
      * Test of isPathFree method, of class Bishop.
+     * @throws java.lang.Exception
      */
     
-    /*@Test
-    public void testIsPathFree() throws Exception {
+    @Test
+    public void testIsPathFreeOKr3c3() throws Exception {
         System.out.println("isPathFree");
-        int initial_row = 0;
-        int initial_col = 0;
-        int dest_row = 0;
-        int dest_col = 0;
-        Board board = null;
-        Bishop instance = null;
-        instance.isPathFree(initial_row, initial_col, dest_row, dest_col, board);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    } */
+        Mockito.when(mockBoard.getPiece(Mockito.anyInt(), Mockito.anyInt())).thenReturn(null) ;
+        int rO = 0;
+        int cO = 0;
+        int rD = rO+3;
+        int cD = cO+3;
+
+        bishopInstance.isPathFree(rO, cO, rD, cD, mockBoard);
+    }  
+    public void testIsPathFreeOKr2c2() throws Exception {
+        System.out.println("isPathFree");
+        Mockito.when(mockBoard.getPiece(Mockito.anyInt(), Mockito.anyInt())).thenReturn(null) ;
+        int rO = 3;
+        int cO = 3;
+        int rD = rO+2;
+        int cD = cO-2;
+
+        bishopInstance.isPathFree(rO, cO, rD, cD, mockBoard);
+    } 
+    
+    /**
+     *
+     * @throws Exception
+     */
+    @Test(expected = NoPathFreeException.class)
+    public void testIsPathFreeKOr3c3() throws Exception {
+        System.out.println("isPathFree KO");
+        Bishop oBishop = new Bishop(Color.BLACK, 3, 1);
+        Mockito.when(this.mockBoard.getPiece(6, 6)).thenReturn(oBishop) ;
+        int rO = 4;
+        int cO = 4;
+        int rD = rO+3;
+        int cD = cO+3;
+               
+
+        bishopInstance.isPathFree(rO, cO, rD, cD, mockBoard);
+    } 
+    
     
 }
