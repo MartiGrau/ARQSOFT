@@ -19,7 +19,14 @@ final public class Queen extends Figure
     @Override
     protected void isPieceMovement(int initial_row, int initial_col, int dest_row, int dest_col) throws NoPieceMovementException
     {
-        // All possibilities.. Any exception, only isPathFree
+        if (!(initial_row - dest_row == initial_col - dest_col || initial_row == dest_row || initial_col == dest_col))
+        {
+            throw new NoPieceMovementException();
+        }  
+        if (initial_row == dest_row && initial_col == dest_col)
+        {
+            throw new NoPieceMovementException();
+        }
     }
     @Override
     protected void isPathFree(int initial_row, int initial_col, int dest_row, int dest_col, Board board) throws NoPathFreeException
