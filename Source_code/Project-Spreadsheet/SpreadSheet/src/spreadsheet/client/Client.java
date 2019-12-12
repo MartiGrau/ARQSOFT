@@ -40,6 +40,14 @@ public class Client
     {
         spreadsheet.addRows(numOfCols);
     }
+    public void editCell(int row, int col, String input)
+    {
+        spreadsheet.editCell(row, col, input);
+    } 
+    public String getCellContent(int row, int col)
+    {
+        return spreadsheet.getCellContent(row, col);
+    }
     
     public static void createSpreadSheetOption(Client client)
     {
@@ -72,12 +80,28 @@ public class Client
     
     public static void editCellOption(Client client)
     {
-        // TODO  
+        // TODO check it works
+        Scanner scn = new Scanner(System.in);
+        System.out.println("Enter position of the cell to edit: <int> <int>");      
+        int x = scn.nextInt();
+        int y = scn.nextInt();
+        scn.nextLine(); // consume \n for next usage
+        System.out.println("Enter the content of the cell");
+        String input = scn.nextLine();
+        client.editCell(x, y, input);
+        System.out.println("Cell edited!");         
     }
     
     public static void getCellValueOption(Client client)
     {
-        // TODO
+        // TODO check this works
+        Scanner scn = new Scanner(System.in);
+        System.out.println("Enter position of the cell you want to view: <int> <int>");      
+        int x = scn.nextInt();
+        int y = scn.nextInt();
+        String cellContent = client.getCellContent(x, y);
+        System.out.println("The value of the cell is: ");
+        System.out.println(cellContent);          
     }
     
     public static void exportSpreadSheet(Client client)
@@ -101,6 +125,8 @@ public class Client
             System.out.println("1 Create an spreadsheet");
             System.out.println("2 Add columns to spreadsheet");
             System.out.println("3 Add rows to spreadsheet");
+            System.out.println("4 Edit or add cell to spreadsheet");
+            System.out.println("5 Get content of cell in spreadsheet");
             int option = scn.nextInt();
             switch(option)
             {
@@ -112,6 +138,12 @@ public class Client
                     break;
                 case 3:
                     addRowOption(client);
+                    break;
+                case 4:
+                    editCellOption(client);
+                    break;
+                case 5:
+                    getCellValueOption(client);
                     break;
                 default:
                     System.out.println("Unrecognized option!");                   

@@ -5,6 +5,8 @@
  */
 package spreadsheet;
 
+import static spreadsheet.CellFactory.*;
+
 /**
  *
  * @author uni
@@ -44,6 +46,15 @@ public class SpreadSheet
             }
         } 
         cells = temp;
-    }        
+    }
+    public void editCell(int row, int col, String input)
+    {
+        cells[row][col] = createCell(input);
+    } 
+    
+    public String getCellContent(int row, int col)
+    {
+        return cells[row][col].getContent();
+    } 
     
 }
