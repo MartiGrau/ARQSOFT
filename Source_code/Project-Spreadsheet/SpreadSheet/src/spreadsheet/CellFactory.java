@@ -39,7 +39,5 @@ public class CellFactory
             return false;
         }    
         return true;
-} 
-
-    
+    }     
 }
