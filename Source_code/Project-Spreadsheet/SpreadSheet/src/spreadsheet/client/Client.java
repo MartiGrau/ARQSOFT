@@ -117,6 +117,8 @@ public class Client
     
     public static void main(String[] args) 
     {
+        // TODO change rows to a letter. 
+        // TODO change position to index when accessing and consulting cells! (position A1 is index 00)
         Client client = new Client();
         Scanner scn = new Scanner(System.in);
         while (!client.isExit())
