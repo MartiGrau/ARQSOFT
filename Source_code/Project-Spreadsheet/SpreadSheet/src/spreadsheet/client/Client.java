@@ -7,6 +7,7 @@ package spreadsheet.client;
 
 import java.lang.*;
 import java.util.Scanner;
+import spreadsheet.EmptyCellException;
 import spreadsheet.SpreadSheet;
 
 /**
@@ -45,9 +46,16 @@ public class Client
     {
         spreadsheet.editCell(row, col, input);
     } 
-    public String getCellContent(int row, int col)
+    public String getCellContent(int row, int col) 
     {
-        return spreadsheet.getCellContent(row, col);
+        try
+        {
+            return spreadsheet.getCellContent(row, col);    
+        }
+        catch(EmptyCellException e)
+        {
+            return "";
+        }        
     }
     
     public static void createSpreadSheetOption(Client client)
@@ -142,6 +150,8 @@ public class Client
             System.out.println("3 Add rows to spreadsheet");
             System.out.println("4 Edit or add cell to spreadsheet");
             System.out.println("5 Get content of cell in spreadsheet");
+            System.out.println("6 Load an spreadsheet");
+            System.out.println("7 Save current spreadsheet");
             int option = scn.nextInt();
             switch(option)
             {
@@ -160,6 +170,10 @@ public class Client
                 case 5:
                     getCellValueOption(client);
                     break;
+                case 6:
+                    System.out.println("Feature not implemented yet!"); 
+                case 7:
+                    System.out.println("Feature not implemented yet!"); 
                 default:
                     System.out.println("Unrecognized option!");                   
                     

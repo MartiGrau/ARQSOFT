@@ -49,12 +49,39 @@ public class SpreadSheet
     }
     public void editCell(int row, int col, String input)
     {
-        cells[row][col] = createCell(input);
+        cells[row][col] = createCell(input, this);
     } 
     
-    public String getCellContent(int row, int col)
+    public String getCellContent(int row, int col) throws EmptyCellException
     {
+        if (cells[row][col].getContent() == null)
+        {            
+            throw new EmptyCellException();
+        }
         return cells[row][col].getContent();
+    } 
+    
+    public float getCellValue(int row, int col) throws EmptyCellException
+    {
+        if (cells[row][col].getContent() == null)
+        {            
+            throw new EmptyCellException();
+        }
+        if (cells[row][col] instanceof StringCell)
+        {
+            throw new EmptyCellException();
+        }
+        if (cells[row][col] instanceof ValueCell)
+        {
+            ValueCell vCell = (ValueCell)cells[row][col];
+            return vCell.getValue();  
+        }
+        if (cells[row][col] instanceof FormulaCell)
+        {
+            FormulaCell fCell = (FormulaCell)cells[row][col];
+            return fCell.getValue();            
+        } 
+        throw new EmptyCellException();
     } 
     
 }

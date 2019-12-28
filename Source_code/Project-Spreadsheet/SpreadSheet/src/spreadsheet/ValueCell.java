@@ -16,22 +16,23 @@ public final class ValueCell extends Cell
         super(content);
         this.value = Float.parseFloat(content);
     }
+    
     @Override
     public String getContent()
     {
-        return content;
-        
+        return content;        
     }
-    @Override
-    public void setContent(String content)
+    
+    private void setContent(String content)
     {
         this.content = content; 
         this.value = Float.parseFloat(content);
     }
+    
     public float getValue()
     {
         return value;
     }
-    private float value;
+    private float value;    
     
 }

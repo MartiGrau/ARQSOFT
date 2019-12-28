@@ -9,15 +9,10 @@ package spreadsheet;
  *
  * @author uni
  */
-public class StringCell extends Cell
-{
-    public StringCell(String content) 
+public class EmptyCellException extends Exception{
+    public EmptyCellException()
     {
-        super(content);
+        
     }
-    @Override
-    public String getContent()
-    {
-        return content;
-    }
+    
 }

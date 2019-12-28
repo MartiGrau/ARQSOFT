@@ -11,7 +11,7 @@ package spreadsheet;
  */
 public class CellFactory 
 {
-    public static Cell createCell(String input) 
+    public static Cell createCell(String input, SpreadSheet spreadSheet) 
     {
         String firstFormulaChar;
         firstFormulaChar = "=";
@@ -21,7 +21,7 @@ public class CellFactory
         }
         else if (input.charAt(0) == firstFormulaChar.charAt(0))
         {
-            return new FormulaCell(input);
+            return new FormulaCell(input, spreadSheet);
         }
         else
         {
