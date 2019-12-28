@@ -5,6 +5,7 @@
  */
 package spreadsheet.client;
 
+import java.lang.*;
 import java.util.Scanner;
 import spreadsheet.SpreadSheet;
 
@@ -82,13 +83,13 @@ public class Client
     {
         // TODO check it works
         Scanner scn = new Scanner(System.in);
-        System.out.println("Enter position of the cell to edit: <int> <int>");      
-        int x = scn.nextInt();
-        int y = scn.nextInt();
+        System.out.println("Enter position of the cell to edit: <Letter><Number>");    
+        String positionInput = scn.next();
+        int coordinates[] = inputToCoordinates(positionInput);
         scn.nextLine(); // consume \n for next usage
         System.out.println("Enter the content of the cell");
-        String input = scn.nextLine();
-        client.editCell(x, y, input);
+        String input = scn.nextLine();        
+        client.editCell(coordinates[0], coordinates[1], input);
         System.out.println("Cell edited!");         
     }
     
@@ -96,10 +97,11 @@ public class Client
     {
         // TODO check this works
         Scanner scn = new Scanner(System.in);
-        System.out.println("Enter position of the cell you want to view: <int> <int>");      
-        int x = scn.nextInt();
-        int y = scn.nextInt();
-        String cellContent = client.getCellContent(x, y);
+        System.out.println("Enter position of the cell you want to view: <Letter><Number>");      
+        String positionInput = scn.next();
+        int coordinates[] = inputToCoordinates(positionInput);
+        scn.nextLine(); // consume \n for next usage
+        String cellContent = client.getCellContent(coordinates[0], coordinates[1]);
         System.out.println("The value of the cell is: ");
         System.out.println(cellContent);          
     }
@@ -112,13 +114,24 @@ public class Client
     public static void importSpreadSheet(Client client)
     {
         // TODO
-    } 
+    }
+    
+    private static int[] inputToCoordinates(String input)
+    {
+        String[] inputDivided = input.split("(?<=\\D)(?=\\d)");
+        int numberOfLetters = inputDivided[0].length();
+        char xChar = inputDivided[0].charAt(0);
+        int x_index = Character.toLowerCase(xChar) - 'a';
+        // Deal with the case there is more than 1 letter ex: AA1
+        x_index = x_index + (Character.toLowerCase('z') - 'a')*(numberOfLetters-1);
+        // Substract 1 because we want to deal with index
+        int y_index = Integer.parseInt(inputDivided[1]) - 1;
+        return new int[]{x_index,y_index};
+    }
     
     
     public static void main(String[] args) 
     {
-        // TODO change rows to a letter. 
-        // TODO change position to index when accessing and consulting cells! (position A1 is index 00)
         Client client = new Client();
         Scanner scn = new Scanner(System.in);
         while (!client.isExit())
