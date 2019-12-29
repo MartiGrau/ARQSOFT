@@ -5,8 +5,17 @@
  */
 package spreadsheet.client;
 
+import java.io.IOException;
 import java.lang.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import spreadsheet.EmptyCellException;
 import spreadsheet.SpreadSheet;
 
@@ -55,6 +64,41 @@ public class Client
         catch(EmptyCellException e)
         {
             return "";
+        }        
+    }
+    public boolean exportSpreadSheet(String path) 
+    {
+        try
+        {
+            List<String> lines = new ArrayList<>();
+            for (int i = 0; i < spreadsheet.getMaxRow(); i++)
+            {
+                String newline = "";
+                for (int j = 0; j < spreadsheet.getMaxCol(); j++)
+                {
+                    try 
+                    {
+                       newline += spreadsheet.getCellString(i, j);
+                    } 
+                    catch (EmptyCellException ex) 
+                    {
+                        // Do nothing if empty
+                    }
+                    // don't add ; after last cell in row
+                    if (j+1 != spreadsheet.getMaxCol())
+                    {
+                        newline += ";";
+                    }
+                }
+                lines.add(newline);
+            }
+            Path file = Paths.get(path);
+            Files.write(file, lines, StandardCharsets.UTF_8);
+            return true;
+        }
+        catch(IOException e)
+        {
+            return false;
         }        
     }
     
@@ -114,12 +158,24 @@ public class Client
         System.out.println(cellContent);          
     }
     
-    public static void exportSpreadSheet(Client client)
-    {
-        // TODO  
+    public static void exportSpreadSheetOption(Client client)
+    { 
+        Scanner scn = new Scanner(System.in);
+        System.out.println("Enter the path and filename. Ex: /Users/Documents/myfile.txt");      
+        String path = scn.next();
+        boolean res = client.exportSpreadSheet(path);
+        if (res)
+        {
+            System.out.println("File saved as: ");
+            System.out.println(path);         
+        }
+        else
+        {
+            System.out.println("Error while saving file");
+        }
     }
     
-    public static void importSpreadSheet(Client client)
+    public static void importSpreadSheetOption(Client client)
     {
         // TODO
     }
@@ -172,8 +228,10 @@ public class Client
                     break;
                 case 6:
                     System.out.println("Feature not implemented yet!"); 
+                    break;
                 case 7:
-                    System.out.println("Feature not implemented yet!"); 
+                    exportSpreadSheetOption(client);
+                    break;
                 default:
                     System.out.println("Unrecognized option!");                   
                     

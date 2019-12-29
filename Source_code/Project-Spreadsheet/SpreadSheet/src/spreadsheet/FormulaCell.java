@@ -90,6 +90,11 @@ public class FormulaCell extends Cell
         return value;
     }
     
+    public String getInputString()
+    {
+        return inputString;
+    }
+    
     private static int[] inputToCoordinates(String input)
     {
         String[] inputDivided = input.split("(?<=\\D)(?=\\d)");
