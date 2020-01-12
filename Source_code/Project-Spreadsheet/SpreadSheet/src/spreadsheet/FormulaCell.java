@@ -37,7 +37,23 @@ public class FormulaCell extends Cell
     {
         this.inputString = content;
         String contentWithoutEqual = content.substring(1);
-
+        if (contentWithoutEqual.startsWith("SUMA"))
+        {
+            contentWithoutEqual = OperationUtils.performSum(inputString);
+        } 
+        else if (contentWithoutEqual.startsWith("MIN"))
+        {
+            
+        } 
+        else if (contentWithoutEqual.startsWith("MAX"))
+        {
+            
+        }
+        else if (contentWithoutEqual.startsWith("PROMEDIO"))
+        {
+            
+        }
+        
         // Separate string in operators, values and cells in the proper order.
         String[] splittedContent = contentWithoutEqual.split("(?=[-+*/()])|(?<=[^-+*/][-+*/])|(?<=[()])");
         
@@ -48,7 +64,7 @@ public class FormulaCell extends Cell
             if (singleContent.matches("^(?=.*[A-Z])(?=.*[0-9])[A-Z0-9]+$"))
             {
                 // Get value from cells and TODO:add dependency
-                int[] coordinates = inputToCoordinates(singleContent);
+                int[] coordinates = OperationUtils.inputToCoordinates(singleContent);
                 try
                 {           
                     splittedContent[i] = spreadsheet.getCellContent(coordinates[0], coordinates[1]);
@@ -95,18 +111,7 @@ public class FormulaCell extends Cell
         return inputString;
     }
     
-    private static int[] inputToCoordinates(String input)
-    {
-        String[] inputDivided = input.split("(?<=\\D)(?=\\d)");
-        int numberOfLetters = inputDivided[0].length();
-        char xChar = inputDivided[0].charAt(0);
-        int x_index = Character.toLowerCase(xChar) - 'a';
-        // Deal with the case there is more than 1 letter ex: AA1
-        x_index = x_index + (Character.toLowerCase('z') - 'a')*(numberOfLetters-1);
-        // Substract 1 because we want to deal with index
-        int y_index = Integer.parseInt(inputDivided[1]) - 1;
-        return new int[]{x_index,y_index};
-    }
+    
     
     private float value;  
     private String inputString;  
