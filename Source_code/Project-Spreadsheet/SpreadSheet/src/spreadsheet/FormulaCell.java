@@ -37,7 +37,7 @@ public class FormulaCell extends Cell
     {
         this.inputString = content;
         String contentWithoutEqual = content.substring(1);
-        // TODO calculate content with sums, other cells etc.
+
         // Separate string in operators, values and cells in the proper order.
         String[] splittedContent = contentWithoutEqual.split("(?=[-+*/()])|(?<=[^-+*/][-+*/])|(?<=[()])");
         
@@ -60,7 +60,8 @@ public class FormulaCell extends Cell
                         // If it's cell
                         if (singleContent2.matches("^(?=.*[A-Z])(?=.*[0-9])[A-Z0-9]+$"))
                         {
-                            // TODO ADD ALL DEPENDENCIES
+                            //ADD ALL DEPENDENCIES: no needed while we set content when we get it
+                            //this.addPropertyChangeListener(singleContent2); // should be converted to row-col
                         }
                     }
                     this.content = null;
@@ -81,9 +82,7 @@ public class FormulaCell extends Cell
             this.content = Float.toString(value);
         } catch (ScriptException ex) {
             Logger.getLogger(FormulaCell.class.getName()).log(Level.SEVERE, null, ex);
-        }       
- 
-       // this.value = Float.parseFloat(content);
+        }   
     }
     
     public float getValue()
