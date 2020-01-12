@@ -92,4 +92,61 @@ public class OperationUtils
         return result;
     }
     
+    public static String performPromedio(String inputString)
+    {        
+        inputString = inputString.substring(9).replaceAll("[()]", "");
+        String[] cells = inputString.split(",");
+        ArrayList<String> finalCells = new ArrayList<String>();
+
+        for(String cell:cells)
+        {
+            if (cell.contains(":"))
+            {
+                String[] cellsInRange = returnCellsInRange(cell);
+                for (String cellInRange:cellsInRange)
+                {
+                    finalCells.add(cellInRange);
+                }
+            }
+            else{
+                finalCells.add(cell);
+            }
+        }
+        int numberOfCells = finalCells.size();
+        String result = "(";
+        for (String cellToSum:finalCells)
+        {
+            result = result + cellToSum + "+";
+        }
+        result = result + "0)/"+numberOfCells;
+        return result;
+    }
+    
+    public static String[] getAllCells(String inputString)
+    {
+        if (inputString.startsWith("MIN") || inputString.startsWith("MAX"))
+        {
+            inputString = inputString.substring(4).replaceAll("[()]", "");
+        } 
+                
+        String[] cells = inputString.split(",");
+        ArrayList<String> finalCells = new ArrayList<String>();
+
+        for(String cell:cells)
+        {
+            if (cell.contains(":"))
+            {
+                String[] cellsInRange = returnCellsInRange(cell);
+                for (String cellInRange:cellsInRange)
+                {
+                    finalCells.add(cellInRange);
+                }
+            }
+            else{
+                finalCells.add(cell);
+            }
+        }
+        return finalCells.toArray(new String[0]);
+    }
+    
 }

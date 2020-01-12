@@ -43,15 +43,15 @@ public class FormulaCell extends Cell
         } 
         else if (contentWithoutEqual.startsWith("MIN"))
         {
-            
+            String[] allCells = OperationUtils.getAllCells(inputString);
         } 
         else if (contentWithoutEqual.startsWith("MAX"))
         {
-            
+            String[] allCells = OperationUtils.getAllCells(inputString);
         }
         else if (contentWithoutEqual.startsWith("PROMEDIO"))
         {
-            
+            contentWithoutEqual = OperationUtils.performPromedio(inputString);
         }
         
         // Separate string in operators, values and cells in the proper order.
