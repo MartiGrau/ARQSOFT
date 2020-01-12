@@ -9,6 +9,7 @@
             </source-roots>
             <test-roots>
                 <root id="test.src.dir"/>
+                <root id="test.Test%20Packages.dir"/>
             </test-roots>
         </data>
     </configuration>
