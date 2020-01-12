@@ -19,12 +19,13 @@ import org.mockito.junit.MockitoJUnitRunner;
  *
  * @author mgrau
  */
+
 @RunWith(MockitoJUnitRunner.class)
 public class ClientTest {
-    
+
     @Mock
     private Client clientInstance = new Client();
- 
+    
     public ClientTest() {
     }
     
@@ -157,7 +158,7 @@ public class ClientTest {
      */
     //@Test
     public void testCreateSpreadSheetOption() {
-        System.out.println("createSpreadSheetOption");
+        System.out.println("Create SpreadSheet Option");
         Client client = null;
         Client.createSpreadSheetOption(client);
         // TODO review the generated test code and remove the default call to fail.
@@ -169,9 +170,9 @@ public class ClientTest {
      */
     //@Test
     public void testAddRowOption() {
-        System.out.println("addRowOption");
-        Client client = null;
-        Client.addRowOption(client);
+        System.out.println("Add Rows Menu Option");
+        //Client client = null;
+        Client.addRowOption(clientInstance);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -181,7 +182,7 @@ public class ClientTest {
      */
     //@Test
     public void testAddColOption() {
-        System.out.println("addColOption");
+        System.out.println("Add Columns Menu Option");
         Client client = null;
         Client.addColOption(client);
         // TODO review the generated test code and remove the default call to fail.
@@ -244,7 +245,5 @@ public class ClientTest {
         System.out.println("Show main text ok");
         String[] args = null;
         clientInstance.main(args);
-
     }
-    
 }

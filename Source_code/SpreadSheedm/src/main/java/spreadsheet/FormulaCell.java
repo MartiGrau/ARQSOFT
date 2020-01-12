@@ -5,7 +5,9 @@
  */
 package spreadsheet;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.script.ScriptEngine;
@@ -29,6 +31,7 @@ public class FormulaCell extends Cell
     @Override
     public String getContent()
     {
+        setContent(this.inputString);
         return content;
     }
 
@@ -36,7 +39,70 @@ public class FormulaCell extends Cell
     {
         this.inputString = content;
         String contentWithoutEqual = content.substring(1);
-        // TODO calculate content with sums, other cells etc.
+        if (contentWithoutEqual.startsWith("SUMA"))
+        {
+            contentWithoutEqual = OperationUtils.performSum(inputString);
+        } 
+        else if (contentWithoutEqual.startsWith("MIN"))
+        {
+            String[] allCells = OperationUtils.getAllCells(inputString);
+            int i = 0;
+            ArrayList<Float> allValues = new ArrayList<Float>();
+        
+            for (String singleContent : allCells) 
+            {
+                // If it's cell
+                if (singleContent.matches("^(?=.*[A-Z])(?=.*[0-9])[A-Z0-9]+$"))
+                {
+                    // Get value from cells and TODO:add dependency
+                    int[] coordinates = OperationUtils.inputToCoordinates(singleContent);
+                    try
+                    {           
+                        allValues.add(Float.parseFloat(spreadsheet.getCellContent(coordinates[0], coordinates[1])));
+                    }
+                    catch(EmptyCellException e)
+                    {
+                        this.content = null;
+                        return;
+                    }
+                }
+                i++;
+            }
+            contentWithoutEqual = Collections.min(allValues).toString();
+            
+        } 
+        else if (contentWithoutEqual.startsWith("MAX"))
+        {
+            String[] allCells = OperationUtils.getAllCells(inputString);
+            int i = 0;
+            ArrayList<Float> allValues = new ArrayList<Float>();
+        
+            for (String singleContent : allCells) 
+            {
+                // If it's cell
+                if (singleContent.matches("^(?=.*[A-Z])(?=.*[0-9])[A-Z0-9]+$"))
+                {
+                    // Get value from cells and TODO:add dependency
+                    int[] coordinates = OperationUtils.inputToCoordinates(singleContent);
+                    try
+                    {           
+                        allValues.add(Float.parseFloat(spreadsheet.getCellContent(coordinates[0], coordinates[1])));
+                    }
+                    catch(EmptyCellException e)
+                    {
+                        this.content = null;
+                        return;
+                    }
+                }
+                i++;
+            }
+            contentWithoutEqual = Collections.max(allValues).toString();
+        }
+        else if (contentWithoutEqual.startsWith("PROMEDIO"))
+        {
+            contentWithoutEqual = OperationUtils.performPromedio(inputString);
+        }
+        
         // Separate string in operators, values and cells in the proper order.
         String[] splittedContent = contentWithoutEqual.split("(?=[-+*/()])|(?<=[^-+*/][-+*/])|(?<=[()])");
         
@@ -47,7 +113,7 @@ public class FormulaCell extends Cell
             if (singleContent.matches("^(?=.*[A-Z])(?=.*[0-9])[A-Z0-9]+$"))
             {
                 // Get value from cells and TODO:add dependency
-                int[] coordinates = inputToCoordinates(singleContent);
+                int[] coordinates = OperationUtils.inputToCoordinates(singleContent);
                 try
                 {           
                     splittedContent[i] = spreadsheet.getCellContent(coordinates[0], coordinates[1]);
@@ -59,7 +125,8 @@ public class FormulaCell extends Cell
                         // If it's cell
                         if (singleContent2.matches("^(?=.*[A-Z])(?=.*[0-9])[A-Z0-9]+$"))
                         {
-                            // TODO ADD ALL DEPENDENCIES
+                            //ADD ALL DEPENDENCIES: no needed while we set content when we get it
+                            //this.addPropertyChangeListener(singleContent2); // should be converted to row-col
                         }
                     }
                     this.content = null;
@@ -80,9 +147,7 @@ public class FormulaCell extends Cell
             this.content = Float.toString(value);
         } catch (ScriptException ex) {
             Logger.getLogger(FormulaCell.class.getName()).log(Level.SEVERE, null, ex);
-        }       
- 
-       // this.value = Float.parseFloat(content);
+        }   
     }
     
     public float getValue()
@@ -95,18 +160,7 @@ public class FormulaCell extends Cell
         return inputString;
     }
     
-    private static int[] inputToCoordinates(String input)
-    {
-        String[] inputDivided = input.split("(?<=\\D)(?=\\d)");
-        int numberOfLetters = inputDivided[0].length();
-        char xChar = inputDivided[0].charAt(0);
-        int x_index = Character.toLowerCase(xChar) - 'a';
-        // Deal with the case there is more than 1 letter ex: AA1
-        x_index = x_index + (Character.toLowerCase('z') - 'a')*(numberOfLetters-1);
-        // Substract 1 because we want to deal with index
-        int y_index = Integer.parseInt(inputDivided[1]) - 1;
-        return new int[]{x_index,y_index};
-    }
+    
     
     private float value;  
     private String inputString;  

@@ -5,7 +5,6 @@
  */
 package spreadsheet.client;
 
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -21,6 +20,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import spreadsheet.EmptyCellException;
+import spreadsheet.FileUtils;
 import spreadsheet.SpreadSheet;
 
 /**
@@ -72,85 +72,12 @@ public class Client
     }
     public boolean exportSpreadSheet(String path) 
     {
-        try
-        {
-            List<String> lines = new ArrayList<>();
-            for (int i = 0; i < spreadsheet.getMaxRow(); i++)
-            {
-                String newline = "";
-                for (int j = 0; j < spreadsheet.getMaxCol(); j++)
-                {
-                    try 
-                    {
-                       newline += spreadsheet.getCellString(i, j);
-                    } 
-                    catch (EmptyCellException ex) 
-                    {
-                        // Do nothing if empty
-                    }
-                    // don't add ; after last cell in row
-                    if (j+1 != spreadsheet.getMaxCol())
-                    {
-                        newline += ";";
-                    }
-                }
-                lines.add(newline);
-            }
-            Path file = Paths.get(path);
-            Files.write(file, lines, StandardCharsets.UTF_8);
-            return true;
-        }
-        catch(IOException e)
-        {
-            return false;
-        }        
+       return FileUtils.exportSpreadSheet(path, spreadsheet);
     }
     
     public boolean importSpreadSheet(String path) 
     {
-        try
-        {            
-            FileReader input = new FileReader(path);
-            BufferedReader bufRead = new BufferedReader(input);
-            String myLine = null;
-            
-            // read nextLine
-            boolean firstLine = true;
-            int row = 0;
-            while ( (myLine = bufRead.readLine()) != null)
-            {
-                if (firstLine)
-                {
-                    int count =  myLine.length() - myLine.replace(";", "").length() + 1; // +1 for cell after last token
-                    createSpreadSheet(1, count);
-                    firstLine = false;  
-                }
-                else 
-                {
-                    addRow(1);
-                }
-                String[] tokens = myLine.split(";", -1);
-                
-                int column = 0;
-                for (String token : tokens)
-                {
-                    if (!"".equals(token))
-                    {
-                        editCell(row, column, token);
-                        System.out.println(token);
-                    }
-                    column++;
-                }
-                row++;  
-            }
-            bufRead.close();
-            return true;
-        } 
-        catch (IOException e)
-        {
-            e.printStackTrace();
-            return false;
-        }
+        return FileUtils.importSpreadSheet(path, this);
     }
     
     public static void createSpreadSheetOption(Client client)
@@ -264,13 +191,13 @@ public class Client
         while (!client.isExit())
         {
             System.out.println("Choose an option of below by entering the option number: ");
-            System.out.println("1 Create an spreadsheet");
+            System.out.println("1 Create an spreadsheet (will overwrite any unsaved changes)");
             System.out.println("2 Add columns to spreadsheet");
             System.out.println("3 Add rows to spreadsheet");
-            System.out.println("4 Edit or add cell to spreadsheet");
+            System.out.println("4 Edit cell of spreadsheet");
             System.out.println("5 Get content of cell in spreadsheet");
-            System.out.println("6 Load an spreadsheet");
-            System.out.println("7 Save current spreadsheet");
+            System.out.println("6 Load (import) an spreadsheet (will overwrite any unsaved changes)");
+            System.out.println("7 Save (export) current spreadsheet");
             int option = scn.nextInt();
             switch(option)
             {
