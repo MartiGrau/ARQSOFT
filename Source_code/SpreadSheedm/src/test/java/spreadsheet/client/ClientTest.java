@@ -10,10 +10,12 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.Assert;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+
 
 /**
  *
@@ -105,7 +107,7 @@ public class ClientTest {
         System.out.println("Edit Cell");
         int row = 2;
         int col = 2;
-        String input = "1";
+        String input = "5";
         clientInstance.editCell(row, col, input);
     }
 
@@ -117,9 +119,9 @@ public class ClientTest {
         System.out.println("Get Cell content");
         int row = 2;
         int col = 2;
-        String expResult = "1";
+        String expResult = "5";
         String result = clientInstance.getCellContent(row, col);
-        assertEquals(expResult, result);
+        Assert.assertEquals(expResult, result);
         fail("The values are not the same");
     }
 
