@@ -5,7 +5,9 @@
  */
 package spreadsheet;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.script.ScriptEngine;
@@ -44,10 +46,57 @@ public class FormulaCell extends Cell
         else if (contentWithoutEqual.startsWith("MIN"))
         {
             String[] allCells = OperationUtils.getAllCells(inputString);
+            int i = 0;
+            ArrayList<Float> allValues = new ArrayList<Float>();
+        
+            for (String singleContent : allCells) 
+            {
+                // If it's cell
+                if (singleContent.matches("^(?=.*[A-Z])(?=.*[0-9])[A-Z0-9]+$"))
+                {
+                    // Get value from cells and TODO:add dependency
+                    int[] coordinates = OperationUtils.inputToCoordinates(singleContent);
+                    try
+                    {           
+                        allValues.add(Float.parseFloat(spreadsheet.getCellContent(coordinates[0], coordinates[1])));
+                    }
+                    catch(EmptyCellException e)
+                    {
+                        this.content = null;
+                        return;
+                    }
+                }
+                i++;
+            }
+            contentWithoutEqual = Collections.min(allValues).toString();
+            
         } 
         else if (contentWithoutEqual.startsWith("MAX"))
         {
             String[] allCells = OperationUtils.getAllCells(inputString);
+            int i = 0;
+            ArrayList<Float> allValues = new ArrayList<Float>();
+        
+            for (String singleContent : allCells) 
+            {
+                // If it's cell
+                if (singleContent.matches("^(?=.*[A-Z])(?=.*[0-9])[A-Z0-9]+$"))
+                {
+                    // Get value from cells and TODO:add dependency
+                    int[] coordinates = OperationUtils.inputToCoordinates(singleContent);
+                    try
+                    {           
+                        allValues.add(Float.parseFloat(spreadsheet.getCellContent(coordinates[0], coordinates[1])));
+                    }
+                    catch(EmptyCellException e)
+                    {
+                        this.content = null;
+                        return;
+                    }
+                }
+                i++;
+            }
+            contentWithoutEqual = Collections.max(allValues).toString();
         }
         else if (contentWithoutEqual.startsWith("PROMEDIO"))
         {

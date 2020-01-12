@@ -124,7 +124,7 @@ public class OperationUtils
     
     public static String[] getAllCells(String inputString)
     {
-        if (inputString.startsWith("MIN") || inputString.startsWith("MAX"))
+        if (inputString.startsWith("=MIN") || inputString.startsWith("=MAX"))
         {
             inputString = inputString.substring(4).replaceAll("[()]", "");
         } 
