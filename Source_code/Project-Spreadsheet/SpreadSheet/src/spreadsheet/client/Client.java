@@ -137,7 +137,6 @@ public class Client
                     if (!"".equals(token))
                     {
                         editCell(row, column, token);
-                        System.out.println(token);
                     }
                     column++;
                 }
@@ -264,13 +263,13 @@ public class Client
         while (!client.isExit())
         {
             System.out.println("Choose an option of below by entering the option number: ");
-            System.out.println("1 Create an spreadsheet");
+            System.out.println("1 Create an spreadsheet (will overwrite any unsaved changes)");
             System.out.println("2 Add columns to spreadsheet");
             System.out.println("3 Add rows to spreadsheet");
-            System.out.println("4 Edit or add cell to spreadsheet");
+            System.out.println("4 Edit cell of spreadsheet");
             System.out.println("5 Get content of cell in spreadsheet");
-            System.out.println("6 Load an spreadsheet");
-            System.out.println("7 Save current spreadsheet");
+            System.out.println("6 Load (import) an spreadsheet (will overwrite any unsaved changes)");
+            System.out.println("7 Save (export) current spreadsheet");
             int option = scn.nextInt();
             switch(option)
             {

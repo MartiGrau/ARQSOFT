@@ -29,6 +29,7 @@ public class FormulaCell extends Cell
     @Override
     public String getContent()
     {
+        setContent(this.inputString);
         return content;
     }
 
