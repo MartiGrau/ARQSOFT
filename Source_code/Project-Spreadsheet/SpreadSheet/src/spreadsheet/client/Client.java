@@ -5,6 +5,10 @@
  */
 package spreadsheet.client;
 
+import com.sun.xml.internal.ws.util.StringUtils;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.lang.*;
 import java.nio.charset.StandardCharsets;
@@ -102,6 +106,53 @@ public class Client
         }        
     }
     
+    public boolean importSpreadSheet(String path) 
+    {
+        try
+        {            
+            FileReader input = new FileReader(path);
+            BufferedReader bufRead = new BufferedReader(input);
+            String myLine = null;
+            
+            // read nextLine
+            boolean firstLine = true;
+            int row = 0;
+            while ( (myLine = bufRead.readLine()) != null)
+            {
+                if (firstLine)
+                {
+                    int count =  myLine.length() - myLine.replace(";", "").length() + 1; // +1 for cell after last token
+                    createSpreadSheet(1, count);
+                    firstLine = false;  
+                }
+                else 
+                {
+                    addRow(1);
+                }
+                String[] tokens = myLine.split(";", -1);
+                
+                int column = 0;
+                for (String token : tokens)
+                {
+                    if (!"".equals(token))
+                    {
+                        editCell(row, column, token);
+                        System.out.println(token);
+                    }
+                    column++;
+                }
+                row++;  
+            }
+            bufRead.close();
+            return true;
+        } 
+        catch (IOException e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
     public static void createSpreadSheetOption(Client client)
     {
         Scanner scn = new Scanner(System.in);
@@ -161,7 +212,7 @@ public class Client
     public static void exportSpreadSheetOption(Client client)
     { 
         Scanner scn = new Scanner(System.in);
-        System.out.println("Enter the path and filename. Ex: /Users/Documents/myfile.txt");      
+        System.out.println("Enter the path with filename. Ex: /Users/Documents/myfile.txt");      
         String path = scn.next();
         boolean res = client.exportSpreadSheet(path);
         if (res)
@@ -177,7 +228,19 @@ public class Client
     
     public static void importSpreadSheetOption(Client client)
     {
-        // TODO
+        Scanner scn = new Scanner(System.in);
+        System.out.println("Enter the path Ex: /Users/Documents/myfile.txt");      
+        String path = scn.next();
+        boolean res = client.importSpreadSheet(path);
+        if (res)
+        {
+            System.out.println("File imported");
+            System.out.println(path);         
+        }
+        else
+        {
+            System.out.println("Malformed file");
+        }
     }
     
     private static int[] inputToCoordinates(String input)
@@ -227,7 +290,7 @@ public class Client
                     getCellValueOption(client);
                     break;
                 case 6:
-                    System.out.println("Feature not implemented yet!"); 
+                    importSpreadSheetOption(client);
                     break;
                 case 7:
                     exportSpreadSheetOption(client);
