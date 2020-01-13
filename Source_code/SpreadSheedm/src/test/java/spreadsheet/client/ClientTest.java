@@ -5,6 +5,7 @@
  */
 package spreadsheet.client;
 
+import spreadsheet.SpreadSheet;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -14,6 +15,8 @@ import org.junit.Assert;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
+import static org.mockito.MockitoAnnotations.initMocks;
 import org.mockito.junit.MockitoJUnitRunner;
 
 
@@ -24,23 +27,28 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ClientTest {
-
+    
     @Mock
-    private Client clientInstance = new Client();
+    private SpreadSheet mockSpreadSheet;
+    private Client clientInstance;
     
     public ClientTest() {
     }
     
     @BeforeClass
     public static void setUpClass() {
+        System.out.println("Starting Test for class Client");
     }
     
     @AfterClass
     public static void tearDownClass() {
+        System.out.println("Ending Test for class Client");
     }
     
     @Before
     public void setUp() {
+       initMocks(this);
+       clientInstance = new Client();
     }
     
     @After
@@ -53,19 +61,22 @@ public class ClientTest {
     @Test
     public void testIsExit() {
         System.out.println("Test is Exit");
-        boolean expResult = false;
+        boolean expResult = true;
+        boolean shouldExit = true;
+        clientInstance.setExit(shouldExit);
         boolean result = clientInstance.isExit();
-        assertEquals(expResult, result);
+        Assert.assertEquals(expResult, result);
     }
 
     /**
      * Test of setExit method, of class Client.
      */
-    @Test
+    //@Test
     public void testSetExit() {
         System.out.println("Test Set Exit");
         boolean shouldExit = false;
         clientInstance.setExit(shouldExit);
+        
     }
 
     /**
@@ -83,7 +94,7 @@ public class ClientTest {
      * Test of addRow method, of class Client.
      */
     @Test
-    public void testAddRow() {
+    public void testAddRow(){
         System.out.println("Adding new rows");
         int numOfRows = 2;
         clientInstance.addRow(numOfRows);
@@ -114,7 +125,7 @@ public class ClientTest {
     /**
      * Test of getCellContent method, of class Client.
      */
-    //@Test
+    @Test
     public void testGetCellContent() {
         System.out.println("Get Cell content");
         int row = 2;
