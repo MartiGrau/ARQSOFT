@@ -106,7 +106,7 @@ public class Client
         System.out.println("Enter number of columns to add: <int>");      
         int x = scn.nextInt();
         client.addCol(x);
-        System.out.println("Col added!"); 
+        System.out.println("Column added!"); 
     }
     
     public static void editCellOption(Client client)
